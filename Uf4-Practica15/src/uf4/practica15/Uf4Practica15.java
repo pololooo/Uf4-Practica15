@@ -10,10 +10,6 @@ public class Uf4Practica15 {
     
 }
 /*
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 public class Baralla {
     private List<Carta> cartes;
     private List<Carta> cartesRetornades;
