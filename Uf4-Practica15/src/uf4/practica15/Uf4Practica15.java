@@ -1,5 +1,7 @@
 package uf4.practica15;
 
+import java.util.*;
+
 public class Uf4Practica15 {
 
     public static void main(String[] args) {
@@ -8,89 +10,79 @@ public class Uf4Practica15 {
     
 }
 /*
-public class Carta {
-  private String pal;
-  private int numero;
-
-  public Carta(String pal, int numero) {
-    this.pal = pal;
-    this.numero = numero;
-  }
-
-  public String getPal() {
-    return pal;
-  }
-
-  public int getNumero() {
-    return numero;
-  }
-
-  public String toString() {
-    return numero + " de " + pal;
-  }
-}
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class Baralla {
-  private List<Carta> cartes;
+    private List<Carta> cartes;
+    private List<Carta> cartesRetornades;
 
-  public Baralla() {
-    cartes = new ArrayList<Carta>();
-    String[] pals = {"oros", "copes", "espases", "bastos"};
-    for (String pal : pals) {
-      for (int i = 1; i <= 12; i++) {
-        cartes.add(new Carta(pal, i));
-      }
+    public Baralla() {
+        cartes = new ArrayList<>();
+        cartesRetornades = new ArrayList<>();
+        String[] pals = {"oros", "copes", "espases", "bastos"};
+        for (String pal : pals) {
+            for (int i = 1; i <= 12; i++) {
+                cartes.add(new Carta(pal, i));
+            }
+        }
     }
-  }
 
-  public void barrejar() {
-    Collections.shuffle(cartes);
-  }
-
-  public Carta seguentCarta() {
-    if (cartes.size() == 0) {
-      System.out.println("No queden més cartes.");
-      return null;
+    public void barrejar() {
+        Collections.shuffle(cartes);
     }
-    Carta carta = cartes.remove(0);
-    return carta;
-  }
 
-  public int cartesDisponibles() {
-    return cartes.size();
-  }
-
-  public List<Carta> demanarCartes(int numCartes) {
-    List<Carta> cartesJugador = new ArrayList<Carta>();
-    if (numCartes > cartes.size()) {
-      System.out.println("No hi ha suficients cartes.");
-      return cartesJugador;
+    public Carta seguentCarta() {
+        if (cartes.isEmpty()) {
+            System.out.println("No queden més cartes.");
+            return null;
+        }
+        Carta carta = cartes.remove(0);
+        cartesRetornades.add(carta);
+        return carta;
     }
-    for (int i = 0; i < numCartes; i++) {
-      Carta carta = seguentCarta();
-      if (carta != null) {
-        cartesJugador.add(carta);
-      }
+
+    public int cartesDisponibles() {
+        return cartes.size();
     }
-    return cartesJugador;
-  }
 
-  public List<Carta> repartirCartes(int numCartes
+    public List<Carta> demanarCartes(int numCartes) {
+        if (cartes.size() < numCartes) {
+            System.out.println("No hi ha prou cartes.");
+            return null;
+        }
+        List<Carta> cartesDemanades = new ArrayList<>();
+        for (int i = 0; i < numCartes; i++) {
+            Carta carta = seguentCarta();
+            if (carta == null) {
+                break;
+            }
+            cartesDemanades.add(carta);
+        }
+        return cartesDemanades;
+    }
 
+    public void repartirCartes(int numCartes) {
+        if (cartes.size() < numCartes) {
+            System.out.println("No hi ha prou cartes.");
+            return;
+        }
+        for (int i = 0; i < numCartes; i++) {
+            Carta carta = seguentCarta();
+            if (carta == null) {
+                break;
+            }
+            System.out.println("Carta repartida: " + carta);
+        }
+    }
 
-+---------------+       +---------------+        +---------------+
-|      Carta    |       |    Baralla    |        |     Jugador   |
-+---------------+       +---------------+        +---------------+
-| - pal         |       | - cartes      |        | - nom         |
-| - numero      |       | - barrejar()  |        | - cartes      |
-+---------------+       | - seguent()   |        | - demanar()   |
-                         | - disponibles()|        | - rebre()     |
-                         | - repartir()  |        | - veure_cartes|
-                         | - veureMunt() |        +---------------+
-                         +---------------+
+    public void veureMunt() {
+        System.out.println("Cartes retornades:");
+        for (Carta carta : cartesRetornades) {
+            System.out.println(carta);
+        }
+    }
+}
 
 */
