@@ -10,17 +10,22 @@ public class Uf4Practica15 {
     
 }
 /*
-public class Baralla {
-    private List<Carta> cartes;
-    private List<Carta> cartesRetornades;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
-    public Baralla() {
+public class BarallaEspanyola {
+    private List<Carta> cartes;
+
+    public BarallaEspanyola() {
         cartes = new ArrayList<>();
-        cartesRetornades = new ArrayList<>();
-        String[] pals = {"oros", "copes", "espases", "bastos"};
-        for (String pal : pals) {
-            for (int i = 1; i <= 12; i++) {
-                cartes.add(new Carta(pal, i));
+        // Afegeix totes les cartes a la baralla espanyola
+        for (int i = 1; i <= 12; i++) {
+            cartes.add(new Carta(i, "bastos"));
+            cartes.add(new Carta(i, "espases"));
+            cartes.add(new Carta(i, "copes"));
+            if (i < 8) {
+                cartes.add(new Carta(i, "ors"));
             }
         }
     }
@@ -30,55 +35,76 @@ public class Baralla {
     }
 
     public Carta seguentCarta() {
-        if (cartes.isEmpty()) {
-            System.out.println("No queden més cartes.");
-            return null;
-        }
-        Carta carta = cartes.remove(0);
-        cartesRetornades.add(carta);
-        return carta;
+        return cartes.remove(0);
     }
 
     public int cartesDisponibles() {
         return cartes.size();
     }
 
-    public List<Carta> demanarCartes(int numCartes) {
-        if (cartes.size() < numCartes) {
-            System.out.println("No hi ha prou cartes.");
-            return null;
-        }
+    public void demanarCartes(int n, Jugador jugador) {
         List<Carta> cartesDemanades = new ArrayList<>();
-        for (int i = 0; i < numCartes; i++) {
+        for (int i = 0; i < n; i++) {
             Carta carta = seguentCarta();
-            if (carta == null) {
-                break;
-            }
             cartesDemanades.add(carta);
         }
-        return cartesDemanades;
+        jugador.afegirCartes(cartesDemanades);
     }
 
-    public void repartirCartes(int numCartes) {
-        if (cartes.size() < numCartes) {
-            System.out.println("No hi ha prou cartes.");
-            return;
-        }
-        for (int i = 0; i < numCartes; i++) {
-            Carta carta = seguentCarta();
-            if (carta == null) {
-                break;
+    public void repartirCartes(int n) {
+        for (int i = 0; i < n; i++) {
+            for (Jugador jugador : jugadors) {
+                demanarCartes(1, jugador);
             }
-            System.out.println("Carta repartida: " + carta);
         }
     }
 
     public void veureMunt() {
-        System.out.println("Cartes retornades:");
-        for (Carta carta : cartesRetornades) {
-            System.out.println(carta);
+        for (Carta carta : cartes) {
+            System.out.println(carta.getNumero() + " de " + carta.getPalo());
         }
     }
 }
 
+public class Jugador {
+    private List<Carta> cartes;
+
+    public Jugador() {
+        cartes = new ArrayList<>();
+    }
+
+    public void demanarCartes(int n) {
+        baralla.demanarCartes(n, this);
+    }
+
+    public void repartirCartes(int n) {
+        baralla.repartirCartes(n);
+    }
+
+    public List<Carta> getCartes() {
+        return cartes;
+    }
+
+    public void afegirCartes(List<Carta> cartesNoves) {
+        cartes.addAll(cartesNoves);
+    }
+}
+
+public class Carta {
+    private int numero;
+    private String palo;
+
+    public Carta(int numero, String palo) {
+        this.numero = numero;
+        this.palo = palo;
+    }
+
+    public int getNumero() {
+        return numero;
+    }
+
+    public String getPalo() {
+        return palo;
+    }
+}
 */
