@@ -4,107 +4,46 @@ import java.util.*;
 
 public class Uf4Practica15 {
 
+    public static Scanner scan = new Scanner(System.in);
+
     public static void main(String[] args) {
-        
-    }
-    
-}
-/*
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+        Jugador jugador = new Jugador();
+        BarallaEspanyola baralla = new BarallaEspanyola();
 
-public class BarallaEspanyola {
-    private List<Carta> cartes;
+        int opcion = 1;
+        while (opcion != 0) {
+            System.out.println("1. Barrejar cartes");
+            System.out.println("2. Repartir cartes al jugador");
+            System.out.println("3. Mostrar cartes del jugador");
+            System.out.println("0. Sortir");
+            System.out.print("Introdueix la teva opció: ");
+            opcion = scan.nextInt();
 
-    public BarallaEspanyola() {
-        cartes = new ArrayList<>();
-        // Afegeix totes les cartes a la baralla espanyola
-        for (int i = 1; i <= 12; i++) {
-            cartes.add(new Carta(i, "bastos"));
-            cartes.add(new Carta(i, "espases"));
-            cartes.add(new Carta(i, "copes"));
-            if (i < 8) {
-                cartes.add(new Carta(i, "ors"));
+            switch (opcion) {
+                case 1:
+                    baralla.barrejar();
+                    System.out.println("Cartes barrejades");
+                    break;
+                case 2:
+                    System.out.print("Quantes cartes vols repartir? ");
+                    int n = scan.nextInt();
+                    baralla.demanarCartes(n, jugador);
+                    System.out.println("Cartes repartides al jugador");
+                    break;
+                case 3:
+                    System.out.println("Cartes del jugador:");
+                    for (Carta carta : jugador.getCartes()) {
+                        System.out.println(carta.getNumero() + " de " + carta.getPalo());
+                    }
+                    break;
+                case 4:
+                    System.out.println("Adéu!");
+                    break;
+                default:
+                    System.out.println("Opció no valida");
+                    break;
             }
-        }
-    }
-
-    public void barrejar() {
-        Collections.shuffle(cartes);
-    }
-
-    public Carta seguentCarta() {
-        return cartes.remove(0);
-    }
-
-    public int cartesDisponibles() {
-        return cartes.size();
-    }
-
-    public void demanarCartes(int n, Jugador jugador) {
-        List<Carta> cartesDemanades = new ArrayList<>();
-        for (int i = 0; i < n; i++) {
-            Carta carta = seguentCarta();
-            cartesDemanades.add(carta);
-        }
-        jugador.afegirCartes(cartesDemanades);
-    }
-
-    public void repartirCartes(int n) {
-        for (int i = 0; i < n; i++) {
-            for (Jugador jugador : jugadors) {
-                demanarCartes(1, jugador);
-            }
-        }
-    }
-
-    public void veureMunt() {
-        for (Carta carta : cartes) {
-            System.out.println(carta.getNumero() + " de " + carta.getPalo());
+            System.out.println();
         }
     }
 }
-
-public class Jugador {
-    private List<Carta> cartes;
-
-    public Jugador() {
-        cartes = new ArrayList<>();
-    }
-
-    public void demanarCartes(int n) {
-        baralla.demanarCartes(n, this);
-    }
-
-    public void repartirCartes(int n) {
-        baralla.repartirCartes(n);
-    }
-
-    public List<Carta> getCartes() {
-        return cartes;
-    }
-
-    public void afegirCartes(List<Carta> cartesNoves) {
-        cartes.addAll(cartesNoves);
-    }
-}
-
-public class Carta {
-    private int numero;
-    private String palo;
-
-    public Carta(int numero, String palo) {
-        this.numero = numero;
-        this.palo = palo;
-    }
-
-    public int getNumero() {
-        return numero;
-    }
-
-    public String getPalo() {
-        return palo;
-    }
-}
-*/
